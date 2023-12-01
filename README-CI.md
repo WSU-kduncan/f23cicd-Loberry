@@ -18,5 +18,31 @@ Name: Logan Scarberry
             ![installer4](images/5.PNG) <br>
             3. Navigate to docker's `Settings` > `General` and click the checkbox for `Use the WSL 2 based engine` if it's not already checked. I didn't need to check anything here but if I did, I would need to hit `Apply & restart`. <br>
             ![dockerSettings](images/6.PNG)
+            4. Finally, to check that docker is properly running, run `wsl.exe -l -v`. <br>
+            ![dockerRunning](images/7.PNG)
         - Building an Image:
-            1. lol
+            1. Create a `Dockerfile` inside the project folder: <br>
+            ```
+            # Creating base image
+            FROM ubuntu
+
+            # Specify the author
+            LABEL Logan Scarberry
+
+            # Copying all files to the container
+            COPY . .
+
+            # Installing dependencies (apache2 and git)
+            RUN apt-get update && \
+                sudo apt install apache2 -y && \
+                apt-get install -y git && \
+                reboot
+
+            # Define port number
+            EXPOSE 5000
+
+            # Run the command
+            CMD ["http://localhost/index.html"]
+            ```
+<br>
+
