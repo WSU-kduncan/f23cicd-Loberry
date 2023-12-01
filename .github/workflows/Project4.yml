@@ -1,0 +1,20 @@
+name: Publish Docker Image
+on: 
+    release:
+        types: [published]
+    env:
+        DOCKER_HUB_REPO: loberry/project4_repo
+    jobs:
+        push_to_registry:
+            name: Push Docker image to DockerHub
+            runs-on: ubuntu-latest
+            steps:
+                - name: Checkout the repo
+                uses: actions/checkout@v2
+                - name: Push to DockerHub
+                uses: docker/build-push-action@v1
+                with:
+                    username: ${{ secrets.DOCKER_USERNAME }}
+                    password: ${{ secrets.DOCKER_PASSWORD }}
+                    repository: ${{ env.DOCKER_HUB_REPO }}
+                    tag_with_ref: true
