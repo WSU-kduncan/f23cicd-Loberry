@@ -3,9 +3,10 @@ Name: Logan Scarberry
 ### Part 1 - Dockerize it
 - CI Project Overview
     - In this project I am using `WSL2`, `Docker`, and `apache2`
-        - `WSL2`: Using this to install `Docker`
+        - `WSL2`: Using this as an engine to properly run `Docker`
         - `Docker`: Using this container as an isolated area for running processes.
         - `apache2`: Using this as a resource for setting up and hosting a web server.
+        - `curl`: Using this to verify my site is properly running.
 - Run Project Locally
     - how to install docker + dependencies <br>
         - Installation:
@@ -20,29 +21,18 @@ Name: Logan Scarberry
             ![dockerSettings](images/6.PNG)
             4. Finally, to check that docker is properly running, run `wsl.exe -l -v`. <br>
             ![dockerRunning](images/7.PNG)
-        - Building an Image:
-            1. Create a `Dockerfile` inside the project folder: <br>
-            ```
-            # Creating base image
-            FROM ubuntu
-
-            # Specify the author
-            LABEL Logan Scarberry
-
-            # Copying all files to the container
-            COPY . .
-
-            # Installing dependencies (apache2 and git)
-            RUN apt-get update && \
-                sudo apt install apache2 -y && \
-                apt-get install -y git && \
-                reboot
-
-            # Define port number
-            EXPOSE 5000
-
-            # Run the command
-            CMD ["http://localhost/index.html"]
-            ```
-<br>
-
+    - Building an Image:
+        1. Create a `Dockerfile` inside the project folder: <br>
+        ![Dockerfile](images/8.PNG)
+        2. Type ` docker build -t projectimage .` inside the directory where the `Dockerfile` is located to build the docker image and tag the image with a name. <br>
+        ![dockerBuild](images/9.PNG)
+        3. Use `docker images` to ensure it's running. <br>
+        ![imageRunning](images/10.PNG)
+    - Running the Container:
+        1. Type `docker run projectimage` to run the container. <br>
+        ![containerRunning](images/11.PNG)
+    - Testing the Container:
+        1. Type the IP into the web browser, `172.17.0.2`. This didn't work unfortunately but here's a screenshot from running on my own localhost to verify that the index.html functions correctly. Initially I had thought using `curl` would allow my to verify the site was running in the previous step but that resulted in an error. <br>
+        ![website](images/12.PNG)
+### Part 2 - GitHub Actions and DockerHub
+    

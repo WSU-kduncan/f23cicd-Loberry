@@ -7,14 +7,18 @@ LABEL Logan Scarberry
 # Copying all files to the container
 COPY . .
 
-# Installing dependencies (apache2 and git)
+# Installing dependencies (apache2, and git)
 RUN apt-get update && \
-    sudo apt install apache2 -y && \
-    apt-get install -y git && \
-    reboot
+apt-get install curl -y && \
+apt install apache2 -y && \
+apt-get install -y git && \
+cd website && \
+cp index.html /var/www/html/index.html && \
+/etc/init.d/apache2 start
+
 
 # Define port number
-EXPOSE 5000
+EXPOSE 80
 
-# Run the command
-CMD ["http://localhost/index.html"]
+# Run the command to verify the container is running
+CMD ["curl", "localhost"]
