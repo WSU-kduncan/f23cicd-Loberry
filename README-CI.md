@@ -95,3 +95,6 @@ on:
                     repository: ${{ env.DOCKER_HUB_REPO }}
                     tag_with_ref: true
 ```
+### Part 3 - Diagramming
+- Continuous Integration Process: <br>
+![Diagram](images/26.PNG)
