@@ -1,0 +1,7 @@
+[
+    {
+        "id": "restart-containers",
+        "execute-command": "./containerRestart.sh",
+        "command-working-directory": "/var/webhook"
+    }
+]

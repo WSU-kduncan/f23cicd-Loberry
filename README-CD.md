@@ -8,14 +8,12 @@ Name: Logan Scarberry
     - `git tag -a v1.0.0` > Type in your comment otherwise use `-m` to comment
     - `git show v1.0.0` to display everything included in the version (`q` to quit). <br>
     ![git tag](images/2_1.PNG) <br>
+- Behavior of GitHub workflow
     - `git push origin v1.0.0` To push the tagged commit. <br>
     ![git push](images/2_2.PNG)
     - Navigate back to the repository on GitHub to see that the tag was pushed. <br>
     ![git push example](images/2_3.PNG) <br>
     ![git push 2nd example](images/2_4.PNG)
-    - 
-- Behavior of GitHub workflow
-    - 
 - Link to [DockerHub repository](https://hub.docker.com/repository/docker/loberry/project4_repo/tags?page=1&ordering=last_updated)
 
 ### Part 2 - Development
@@ -29,7 +27,7 @@ Name: Logan Scarberry
     - `sudo install -m 0755 -d /etc/apt/keyrings`
     - `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
     - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
-    - 
+    - Next, run:
     ```
     echo \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
@@ -56,4 +54,7 @@ Name: Logan Scarberry
     - The script does 2 things:
         - `sudo docker pull loberry/project4_repo:latest`: This command pulls the latest docker image from my docker.
         - `sudo docker restart $(sudo docker ps -q)`: This command reads the name of all the container ids from a `docker ps` command and then uses them as a variable for the `docker restart` command. Meaning it will restart all my containers by the id pulled from `docker ps`.
-        
+- Installing `webhook`:
+    - `sudo apt-get install webhook`
+
+
