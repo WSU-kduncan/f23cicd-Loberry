@@ -73,7 +73,7 @@ Name: Logan Scarberry
         - `"command-working-directory": "/var/webhook"`: specifies the working directory for the script once executed.
     - This should be located in the `home` directory on the server. In a better scenario, it should be saved inside the `/etc` folder so that you can save it alongside other `webhook.conf` files.
         - `sudo cp hook.json /etc/webhook.conf`
-- How to configure `DockerHub` to message the listener
+- How to configure `DockerHub` to message the listener:
     - Navigate to the dockerhub repository and select `Webhooks`
     - Paste the webhook url and give it a name: `http://52.72.161.25:9000/hooks/webook` and click `Create` <br>
     ![docker_webhook](images/2_11.PNG)
