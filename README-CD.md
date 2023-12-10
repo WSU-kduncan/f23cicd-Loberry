@@ -77,3 +77,5 @@ Name: Logan Scarberry
     - Navigate to the dockerhub repository and select `Webhooks`
     - Paste the webhook url and give it a name: `http://52.72.161.25:9000/hooks/webook` and click `Create` <br>
     ![docker_webhook](images/2_11.PNG)
+### Part 3 - Diagramming
+![diagram](images/2_12.PNG)
