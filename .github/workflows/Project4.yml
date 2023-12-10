@@ -1,20 +1,33 @@
-name: Publish Docker Image
+name: Project 5 - CI
 on: 
+    push:
+        branches:
+            - 'main'
     release:
         types: [published]
-    env:
-        DOCKER_HUB_REPO: loberry/project4_repo
-    jobs:
-        push_to_registry:
-            name: Push Docker image to DockerHub
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout the repo
-                uses: actions/checkout@v2
-                - name: Push to DockerHub
-                uses: docker/build-push-action@v1
+env:
+    DOCKER_HUB_REPO: loberry/project4_repo
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Set up QEMU
+                uses: docker/setup-qemu-action@v3
+            -
+                name: Set up DOcker Buildx
+                uses: docker/setup-buildx-action@v3
+            -
+                name: Login to Docker Hub
+                uses: docker/login-action@v3
                 with:
                     username: ${{ secrets.DOCKER_USERNAME }}
                     password: ${{ secrets.DOCKER_PASSWORD }}
                     repository: ${{ env.DOCKER_HUB_REPO }}
                     tag_with_ref: true
+            -
+                name: Build and push
+                uses: docker/build-push-action@v5
+                with:
+                    push: true
+                    tags: user/app:latest
