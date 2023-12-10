@@ -56,5 +56,24 @@ Name: Logan Scarberry
         - `sudo docker restart $(sudo docker ps -q)`: This command reads the name of all the container ids from a `docker ps` command and then uses them as a variable for the `docker restart` command. Meaning it will restart all my containers by the id pulled from `docker ps`.
 - Installing `webhook`:
     - `sudo apt-get install webhook`
-
-
+- `webhook` definition file:
+    - `hook.json`:
+    ```
+    [
+        {
+            "id": "restart-containers",
+            "execute-command": "/home/ubuntu/containerRestart.sh",
+            "command-working-directory": "/var/webhook"
+        }
+    ]
+    ```
+    - There are 3 main lines of code inside the file.
+        - `"id": "restart-containers"`: declares an ID for the hook and is used in creating the HTTP endpoint.
+        - `"execute-command": "./containerRestart.sh"`: simply specifies what command to be run when the hook is executed. In my case, it's running my `containerRestart.sh` that restarts my containers.
+        - `"command-working-directory": "/var/webhook"`: specifies the working directory for the script once executed.
+    - This should be located in the `home` directory on the server. In a better scenario, it should be saved inside the `/etc` folder so that you can save it alongside other `webhook.conf` files.
+        - `sudo cp hook.json /etc/webhook.conf`
+- How to configure `DockerHub` to message the listener
+    - Navigate to the dockerhub repository and select `Webhooks`
+    - Paste the webhook url and give it a name: `http://52.72.161.25:9000/hooks/webook` and click `Create` <br>
+    ![docker_webhook](images/2_11.PNG)
